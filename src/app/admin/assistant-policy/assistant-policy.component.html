@@ -1,0 +1,40 @@
+<div class="formContainer">
+  <mat-form-field>
+    <input matInput placeholder="Nombre del Cliente">
+  </mat-form-field>
+
+  <mat-form-field>
+    <textarea matInput placeholder="Descripción"></textarea>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-select placeholder="Tipo de Cubrimiento">
+      <mat-option *ngFor="let TypeCoverings of TypeCovering" [value]="TypeCoverings">
+        {{TypeCoverings}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <input type="number" matInput placeholder="Porcentaje de Cobertura">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput matInput [min]="Now" [matDatepicker]="picker1" placeholder="Fecha de Inicio de Vigencia">
+    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+    <mat-datepicker #picker1></mat-datepicker>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput [min]="Now" [matDatepicker]="picker2" placeholder="Fecha de Terminación">
+    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+    <mat-datepicker #picker2></mat-datepicker>
+  </mat-form-field>
+  <mat-form-field>
+    <input type="number" matInput placeholder="Precio">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-select placeholder="Tipo de Riesgo">
+      <mat-option *ngFor="let TypeRisks of TypeRisk" [value]="TypeRisks">
+        {{TypeRisks}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
