@@ -1,5 +1,21 @@
-.formContainer{
-width: 50%;
+.ContainerFormContainer{
+    width: 100%;
+    display: flex;
+    justify-content: center;  
+
+
+}
+
+.FormContainer{
+width: 100%;
+max-width: 600px;
 display: flex;
 justify-content: center;
+flex-direction: column;
+margin: 10px
+}
+
+.Date{
+    width: 100%;
+    max-width: 280px;
 }
