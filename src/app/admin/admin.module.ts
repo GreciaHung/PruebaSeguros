@@ -17,6 +17,8 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material';
+import { ListPolicyComponent } from './list-policy/list-policy.component';
+import { ComponentsModule } from '../shared/components/components.module';
 
 
 
@@ -37,8 +39,9 @@ import { MatNativeDateModule } from '@angular/material';
     MatSelectModule,
     MatTooltipModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    ComponentsModule
   ],
-  declarations: [AssistantPolicyComponent]
+  declarations: [AssistantPolicyComponent, ListPolicyComponent]
 })
 export class AdminModule { }

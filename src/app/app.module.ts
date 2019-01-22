@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { AdminComponent } from './layout/admin/admin.component';
 import { AuthComponent } from './layout/auth/auth.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     BrowserModule,
     routingModule,
     BrowserAnimationsModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatButtonModule
 
   ],
   providers: [],

@@ -1,3 +1,27 @@
-<p>
-  card works!
-</p>
+<mat-card>
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>{{data.Name}}</mat-card-title>
+      <mat-card-subtitle>{{data.PercentageCoverage+'% '+data.TypeRisk}}</mat-card-subtitle>
+    </mat-card-header>
+    <div fxLayout="column" fxLayoutGap="10px">
+     
+      <div  fxLayout="row" fxLayoutAlign="center" fxLayoutGap="8px">
+        <span class="Title">{{data.TypeCover}}</span>
+        <span class="Title">{{'$'+data.Price}}</span>
+      </div>
+      <div fxLayout="column" fxLayoutGap="10px" >
+        <span class="TitleStartDate">{{data.StartDate | date:'longDate'}}</span>
+        <span class="TitleEndDate">{{data.EndDate | date:'longDate'}}</span>
+    </div>
+      <span class="Title">{{data.Description}}</span>
+      <div fxLayout="row" fxLayoutAlign="space-between center">
+        <button mat-raised-button matTooltip="Borrar" mat-mini-fab color="warn">
+          <mat-icon>delete</mat-icon>
+        </button>
+        <button mat-mini-fab matTooltip="Editar" color="accent" [routerLink]="['/assistant-policy']">
+            <mat-icon>edit</mat-icon>
+        </button>
+      </div>
+    </div>
+  </mat-card>

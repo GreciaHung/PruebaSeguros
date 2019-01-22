@@ -44,10 +44,10 @@
     </mat-form-field>
 
     <div style="padding-top:10px" fxLayout="row" fxLayoutAlign="space-between center">
-      <button mat-fab color="primary">
+      <a [routerLink]="['/list-policy']" mat-raised-button matTooltip="Volver" mat-fab color="accent">
         <mat-icon>arrow_back</mat-icon>
-      </button>
-      <button mat-fab color="accent">
+      </a>
+      <button mat-raised-button matTooltip="Guardar" mat-fab color="primaryt">
         <mat-icon>save</mat-icon>
       </button>
 
