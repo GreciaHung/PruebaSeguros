@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { AdminRoutingModule } from './admin-routing.module';
 import { AssistantPolicyComponent } from './assistant-policy/assistant-policy.component';
 
-
 import {MatCardModule} from '@angular/material/card';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
@@ -21,6 +20,8 @@ import { ListPolicyComponent } from './list-policy/list-policy.component';
 import { ComponentsModule } from '../shared/components/components.module';
 import { RouterModule, Routes } from '@angular/router';
 import { NgxCurrencyModule } from "ngx-currency";
+import { MaskLoadingModule } from '../shared/components/mask-loading/mask-loading.module';
+
 
 @NgModule({
   imports: [
@@ -41,7 +42,8 @@ import { NgxCurrencyModule } from "ngx-currency";
     MatNativeDateModule,
     ComponentsModule,
     RouterModule,
-    NgxCurrencyModule
+    NgxCurrencyModule,
+    MaskLoadingModule
   ],
   declarations: [AssistantPolicyComponent, ListPolicyComponent]
 })

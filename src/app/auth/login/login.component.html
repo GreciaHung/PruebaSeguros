@@ -4,21 +4,21 @@
     <img mat-card-image src="https://us.123rf.com/450wm/tesphoto/tesphoto1704/tesphoto170400167/76965877-male-portrait-flat-design-vector-illustration-modern-avatar-.jpg?ver=6" alt="Photo of profile">
     <mat-card-content class="mat-conten" fxLayout="column" fxLayoutGap="10px">
       <mat-form-field>
-        <input type="email" matInput placeholder="Email" value="example@gmail.com" required>
+        <input type="email" matInput placeholder="Email" [(ngModel)]="email" value="example@gmail.com" required>
       </mat-form-field>
       <mat-form-field>
-        <input matInput placeholder="Password" [type]="typeInput?'text':'password'" [(ngModel)]="value" >
-        <mat-hint align="start"><mat-checkbox>Remember me</mat-checkbox> </mat-hint>
-        <mat-hint align="end" fxLayout="row" fxLayoutAlign="start center" > <a routerLink=".">Forgout password?</a></mat-hint>
+        <input matInput placeholder="Contraseña" [type]="typeInput?'text':'password'" [(ngModel)]="password" >
+        <mat-hint align="start"><mat-checkbox>Recuerdame</mat-checkbox> </mat-hint>
+        <mat-hint align="end" fxLayout="row" fxLayoutAlign="start center" > <a routerLink=".">Olvidó su contraseña?</a></mat-hint>
         <button mat-button  matSuffix mat-icon-button  (click)='typeInput=!typeInput'>
           <mat-icon>{{!typeInput?'visibility':'visibility_off'}}</mat-icon>
         </button>
       </mat-form-field>
     </mat-card-content>
     <mat-card-actions  fxLayout="column" fxLayoutAlign="space-between center" fxLayoutGap="20px">
-      <button class="button-login" mat-raised-button color="primary">Login</button>
+      <button (click)="Login(email,password)" class="button-login" mat-raised-button color="primary">Entrar</button>
       <!-- <button mat-raised-button color="accent">Crear cuenta</button> --> 
-      <p style="font-size:12px">You have not created your account yet? <a  [routerLink]="['/no/create-account']">Create account?</a></p>
+      <p style="font-size:12px">Aún no has creado tu cuenta? <a  [routerLink]="['/no/create-account']">Crear cuenta?</a></p>
     </mat-card-actions>
   </mat-card>
 </div>

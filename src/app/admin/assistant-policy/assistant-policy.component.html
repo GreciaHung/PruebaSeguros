@@ -1,5 +1,6 @@
 <section class="ContainerFormContainer">
   <form [formGroup]='FormPolicy' (ngSubmit)="savePolicy()" class="FormContainer">
+<app-mask-loading [loading]="false"></app-mask-loading>
     <h1 fxLayout="row" fxLayoutAlign="center center">Asistente de Poliza</h1>
     <mat-form-field hintLabel="Max 50 caracteres">
       <input formControlName="Name"  maxlength="50" matInput placeholder="Nombre del Cliente">
