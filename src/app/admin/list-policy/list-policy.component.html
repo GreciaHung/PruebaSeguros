@@ -1,18 +1,19 @@
-<div class="ContainerList">
-        <div class="ContainerSearch">
-                <app-search class="AppSearch"></app-search>
-                <div fxLayoutGap="5px">
-                        <a [routerLink]="['/assistant-policy']" mat-raised-button matTooltip="Agregar">
-                                <mat-icon color="warn">add</mat-icon>
-                        </a>
-                        <button mat-raised-button matTooltip="Loguear/Desloguear">
-                                <mat-icon color="primary">>transit_enterexit</mat-icon>
-                        </button>
-                </div>
+<div>
+    <div fxLayout.lt-md="column" class="ContainerSearch">
+        <app-search class="AppSearch"></app-search>
+        <div fxLayoutGap="5px">
+            <a [routerLink]="['/assistant-policy']" mat-raised-button matTooltip="Agregar">
+                <mat-icon color="warn">add</mat-icon>
+            </a>
+            <button mat-raised-button matTooltip="Loguear/Desloguear" [routerLink]="['/auth/login']">
+                <mat-icon color="primary">>transit_enterexit</mat-icon>
+            </button>
+        </div>
 
-              </div>
-          
-<div class="ContainerCard" *ngFor="let dataPolicy of PolicyList">
-<app-card [data]= "dataPolicy">  </app-card>
-</div> 
+    </div>
+    <div class="ContainerList">
+        <div class="ContainerCard" *ngFor="let dataPolicy of PolicyList">
+            <app-card [data]="dataPolicy"> </app-card>
+        </div>
+    </div>
 </div>

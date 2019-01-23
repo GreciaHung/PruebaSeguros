@@ -19,9 +19,8 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material';
 import { ListPolicyComponent } from './list-policy/list-policy.component';
 import { ComponentsModule } from '../shared/components/components.module';
-
-
-
+import { RouterModule, Routes } from '@angular/router';
+import { NgxCurrencyModule } from "ngx-currency";
 
 @NgModule({
   imports: [
@@ -40,7 +39,9 @@ import { ComponentsModule } from '../shared/components/components.module';
     MatTooltipModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    ComponentsModule
+    ComponentsModule,
+    RouterModule,
+    NgxCurrencyModule
   ],
   declarations: [AssistantPolicyComponent, ListPolicyComponent]
 })

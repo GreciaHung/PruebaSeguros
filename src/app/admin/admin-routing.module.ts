@@ -4,9 +4,12 @@ import { AssistantPolicyComponent } from './assistant-policy/assistant-policy.co
 import { ListPolicyComponent } from './list-policy/list-policy.component';
 
 
+
 const routes: Routes = [
   { path: 'assistant-policy', component: AssistantPolicyComponent},
   { path: 'list-policy', component: ListPolicyComponent   },
+
+  
 ];
 
 @NgModule({

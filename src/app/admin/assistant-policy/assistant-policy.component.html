@@ -1,46 +1,55 @@
 <section class="ContainerFormContainer">
-  <div class="FormContainer">
+  <form [formGroup]='FormPolicy' (ngSubmit)="savePolicy()" class="FormContainer">
     <h1 fxLayout="row" fxLayoutAlign="center center">Asistente de Poliza</h1>
-    <mat-form-field>
-      <input matInput placeholder="Nombre del Cliente">
+    <mat-form-field hintLabel="Max 50 caracteres">
+      <input formControlName="Name"  maxlength="50" matInput placeholder="Nombre del Cliente">
+    <!-- <mat-error *ngIf="FormPolicy.hasError('required')">Ingrese el nombre del usuario</mat-error -->
+      <mat-error *ngIf="FormPolicy.invalid">{{"Ingrese el nombre"}}</mat-error>
     </mat-form-field>
 
-    <mat-form-field>
-      <textarea matInput placeholder="Descripción"></textarea>
+    <mat-form-field hintLabel="Max 100 caracteres" >
+      <textarea formControlName="Description"  maxlength="100"  matInput placeholder="Descripción"></textarea>
+      <mat-error *ngIf="FormPolicy.invalid">{{"Ingrese la descripción"}}</mat-error>
     </mat-form-field>
     <div fxLayout.lt-lg="column" fxLayoutAlign="space-between center">
       <mat-form-field ngStyle.lt-lg="width:100%">
-        <mat-select placeholder="Tipo de Cubrimiento">
-          <mat-option *ngFor="let TypeCoverings of TypeCovering" [value]="TypeCoverings">
-            {{TypeCoverings}}
+        <mat-select formControlName="TypeCover" placeholder="Tipo de Cubrimiento">
+          <mat-option *ngFor="let TypeCoverings of ListTypeCovering" [value]="TypeCoverings.Value">
+            {{TypeCoverings.Name}}
           </mat-option>
         </mat-select>
+        <mat-error *ngIf="FormPolicy.invalid">{{"Ingrese el tipo de cobertura"}}</mat-error>
       </mat-form-field>
       <mat-form-field ngStyle.lt-lg="width:100%">
-        <mat-select placeholder="Tipo de Riesgo">
-          <mat-option *ngFor="let TypeRisks of TypeRisk" [value]="TypeRisks">
-            {{TypeRisks}}
+        <mat-select formControlName="TypeRisk" placeholder="Tipo de Riesgo">
+          <mat-option *ngFor="let TypeRisks of ListTypeRisk" [value]="TypeRisks.Value">
+            {{TypeRisks.Name}}
           </mat-option>
         </mat-select>
+        <mat-error *ngIf="FormPolicy.invalid">{{"Ingrese el tipo de riesgo"}}</mat-error>
       </mat-form-field>
       <mat-form-field ngStyle.lt-lg="width:100%">
-        <input type="number" matInput placeholder="Porcentaje de Cobertura">
+        <input formControlName="PercentageCoverage" type="number" matInput placeholder="Porcentaje de Cobertura" > 
+        <mat-error *ngIf="FormPolicy.invalid">{{getErrorMessagePercentageCoverage()}}</mat-error>
       </mat-form-field>
     </div>
     <div fxLayout.lt-lg="column" fxLayoutAlign="space-between  center">
       <mat-form-field ngStyle.lt-lg="max-width:100%" class="Date">
-        <input matInput matInput [min]="Now" [matDatepicker]="picker1" placeholder="Fecha de Inicio de Vigencia">
+        <input (click)="picker1.open()" formControlName="StartDate" matInput matInput [min]="Now" [max]="FormPolicy.value.EndDate" [matDatepicker]="picker1" placeholder="Fecha de Inicio de Vigencia"[readonly]="true" >
         <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
         <mat-datepicker #picker1></mat-datepicker>
+        <mat-error *ngIf="FormPolicy.invalid">{{"Ingrese la fecha de inicio"}}</mat-error>
       </mat-form-field>
       <mat-form-field ngStyle.lt-lg="max-width:100%" class="Date">
-        <input matInput [min]="Now" [matDatepicker]="picker2" placeholder="Fecha de Terminación">
+        <input (click)="picker2.open()" formControlName="EndDate" matInput [min]="FormPolicy.value.StartDate || Now" [max]="setMoment(Now).add(2,'years').format()" [matDatepicker]="picker2" placeholder="Fecha de Terminación" [readonly]="true">
         <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
         <mat-datepicker #picker2></mat-datepicker>
+        <mat-error *ngIf="FormPolicy.invalid">{{getErrorMessageEndDate()}}</mat-error>
       </mat-form-field>
     </div>
     <mat-form-field>
-      <input type="number" matInput placeholder="Precio">
+      <input currencyMask [options]="{ prefix: '$ ', thousands: '.', decimal: ',' }" formControlName="Price" matInput placeholder="Precio">
+      <mat-error *ngIf="FormPolicy.invalid">{{"Ingrese el precio de la poliza"}}</mat-error>
     </mat-form-field>
 
     <div style="padding-top:10px" fxLayout="row" fxLayoutAlign="space-between center">
@@ -52,5 +61,5 @@
       </button>
 
     </div>
-  </div>
+  </form>
 </section>

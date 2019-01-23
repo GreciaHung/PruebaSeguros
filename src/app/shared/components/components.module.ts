@@ -11,6 +11,7 @@ import { SearchComponent } from './search/search.component';
 import { RouterModule } from '@angular/router';
 
 
+
 @NgModule({
   declarations: [CardComponent, SearchComponent],
   imports: [

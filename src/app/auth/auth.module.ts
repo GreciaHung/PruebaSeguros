@@ -14,6 +14,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material';
+import { RouterModule, Routes } from '@angular/router';
 
 
 @NgModule({
@@ -32,14 +33,16 @@ import { MatNativeDateModule } from '@angular/material';
     ReactiveFormsModule,
     MatTooltipModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    RouterModule
     
 
 
   ],
   declarations: [
     LoginComponent
-  ]
+  ],
+  exports: [LoginComponent]
 })
 export class AuthModule { }
 
