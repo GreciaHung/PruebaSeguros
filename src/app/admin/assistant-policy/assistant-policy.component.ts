@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
 import * as moment from 'moment';
+import { AssistantPolicyManager } from 'src/app/shared/manager/assistant-policy-manager.services';
 
 @Component({
   selector: 'app-assistant-policy',
@@ -22,25 +23,40 @@ export class AssistantPolicyComponent implements OnInit {
     { Name: 'Alto', Value: 4 }
   ];
   public Now = new Date();
+  public loading = false;
+  public edit = false;
 
 
   public FormPolicy: FormGroup = new FormGroup({
-    Name: new FormControl('', [Validators.required]),
+    CustomerName: new FormControl({value:'', disabled: this.edit}, [Validators.required]),
     Description: new FormControl('', [Validators.required]),
-    TypeCover: new FormControl('', [Validators.required]),
+    TypeCover: new FormControl({value:'', disabled: this.edit}, [Validators.required]),
     TypeRisk: new FormControl('', [Validators.required]),
     PercentageCoverage: new FormControl('', [Validators.required]),
-    StartDate: new FormControl('', [Validators.required]),
-    EndDate: new FormControl('', [Validators.required]),
+    StartDate: new FormControl({value:'', disabled: this.edit}, [Validators.required]),
+    EndDate: new FormControl({value:'', disabled: this.edit}, [Validators.required]),
     Price: new FormControl('', [Validators.required])
 
   }, this.PercentageCoverageValidator)
 
-  constructor() { }
+  constructor(
+    private policyManager:AssistantPolicyManager
+  ) { }
 
   ngOnInit() {
-
+    this.policyManager.getLoading().subscribe(load=>this.loading = load);
+    this.policyManager.getPolicy().subscribe(res=>{
+      if(res){
+        res.id && (this.edit = true);
+        this.FormPolicy.patchValue(res);
+      }
+    });
   }
+
+  ngOnDestroid(){
+    this.policyManager.destroyPolicy();
+  }
+
   getErrorMessagePercentageCoverage() {
     return this.FormPolicy.get("PercentageCoverage").hasError('required') ? 'Ingrese el pocentaje de cobertura' :
       this.FormPolicy.get("PercentageCoverage").hasError('customValidation') ? 'Debe ser menor a 50%' :
@@ -86,9 +102,9 @@ export class AssistantPolicyComponent implements OnInit {
 
   savePolicy() {
     console.log(this.FormPolicy.value);
-    
-    if(this.FormPolicy.valid){
 
+    if(this.FormPolicy.valid){
+      this.policyManager.SavePolicy(this.FormPolicy.value);
     }
 
   }

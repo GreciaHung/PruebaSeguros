@@ -6,18 +6,17 @@ import { Policy } from "../models/policy.model";
 @Injectable({
     providedIn: 'root'
 })
-export class AssistantPolicyManager {
+export class ListPolicyManager {
 
 
     constructor() {
 
     }
 
-    UpdatePolicy(){
-    }
     DeletePolicy(){
 
     }
+
     GetAllPolicy(){
 
     }

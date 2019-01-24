@@ -3,7 +3,7 @@
 <app-mask-loading [loading]="false"></app-mask-loading>
     <h1 fxLayout="row" fxLayoutAlign="center center">Asistente de Poliza</h1>
     <mat-form-field hintLabel="Max 50 caracteres">
-      <input formControlName="Name"  maxlength="50" matInput placeholder="Nombre del Cliente">
+      <input formControlName="CustomerName"  maxlength="50" matInput placeholder="Nombre del Cliente">
     <!-- <mat-error *ngIf="FormPolicy.hasError('required')">Ingrese el nombre del usuario</mat-error -->
       <mat-error *ngIf="FormPolicy.invalid">{{"Ingrese el nombre"}}</mat-error>
     </mat-form-field>

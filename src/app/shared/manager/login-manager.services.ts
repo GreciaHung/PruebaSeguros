@@ -24,16 +24,16 @@ export class LoginManager {
     }
 
     Logout() {
-
+        this.deleteToken();
+        this.router.navigate(['/auth/login'])
     }
 
     Login(User, Password) {
-        this._loading.next(true)
+        this._loading.next(true);
         this.LoginService.Loging(User, Password).subscribe(rest => {
             this._loading.next(false);
             this.router.navigate(['/list-policy']);
             localStorage.setItem("session", JSON.stringify(rest));
-            console.log(rest);
 
         }, err => {
             this._loading.next(false)

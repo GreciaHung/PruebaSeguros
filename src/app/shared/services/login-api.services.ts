@@ -16,6 +16,8 @@ export class LoginApiServices {
     }
 
     Loging(userName,password) {
+        console.log("ENTREEE");
+        
         return this.httpClient.post(environment.urlApi + "/token",
         `client_id=macheteapp&grant_type=password&password=${password}&userName=${userName}`,
             {

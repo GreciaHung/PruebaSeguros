@@ -15,6 +15,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material';
 import { RouterModule, Routes } from '@angular/router';
+import { MaskLoadingModule } from '../shared/components/mask-loading/mask-loading.module';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { RouterModule, Routes } from '@angular/router';
     MatTooltipModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    RouterModule
+    RouterModule,
+    MaskLoadingModule
     
 
 

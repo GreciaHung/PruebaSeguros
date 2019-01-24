@@ -5,8 +5,8 @@
             <a [routerLink]="['/assistant-policy']" mat-raised-button matTooltip="Agregar">
                 <mat-icon color="warn">add</mat-icon>
             </a>
-            <button mat-raised-button matTooltip="Loguear/Desloguear" [routerLink]="['/auth/login']">
-                <mat-icon color="primary">>transit_enterexit</mat-icon>
+            <button (click)="logout()" mat-raised-button matTooltip="Loguear/Desloguear" [routerLink]="['/auth/login']">
+                <mat-icon color="primary">transit_enterexit</mat-icon>
             </button>
         </div>
 

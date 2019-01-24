@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Policy } from 'src/app/shared/models/policy.model';
+import { LoginManager } from 'src/app/shared/manager/login-manager.services';
 
 @Component({
   selector: 'app-list-policy',
@@ -8,7 +9,9 @@ import { Policy } from 'src/app/shared/models/policy.model';
 })
 export class ListPolicyComponent implements OnInit {
   public PolicyList: Policy[];
-  constructor() { }
+  constructor(
+    private loginManager:LoginManager
+  ) { }
 
   ngOnInit() {
     this.PolicyList = [
@@ -81,6 +84,10 @@ export class ListPolicyComponent implements OnInit {
       new Policy(1, "Grecia Hung", "DESCRIPJFJFJJFJ", "Terremoto", "Alto", 10, new Date(), new Date(), 200),
       new Policy(1, "Grecia Hung", "DESCRIPJFJFJJFJ", "Terremoto", "Alto", 10, new Date(), new Date(), 200)
     ]
+  }
+
+  logout(){
+    this.loginManager.Logout();
   }
 
 }
