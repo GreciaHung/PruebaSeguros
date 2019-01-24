@@ -14,6 +14,7 @@ export class ListPolicyComponent implements OnInit, OnDestroy {
   public PolicyList: Policy[];
   public loading = false;
   private subcritions = new Subscription();
+  
 
   public searchVal = "";
   public propertiesSearch = ["CustomerName","Description","TypeCover","TypeRisk",]
@@ -47,5 +48,7 @@ export class ListPolicyComponent implements OnInit, OnDestroy {
   Delete(id) {
     this.PolicyManager.DeletePolicy(id);
   }
+
+  
 
 }

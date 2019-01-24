@@ -12,11 +12,19 @@ export class CardComponent implements OnInit {
   public data: Policy;
   @Output()
   public OnDelete: EventEmitter<any> = new EventEmitter();
-
+  
   @Output()
   public OnEdit: EventEmitter<any> = new EventEmitter();
 
   public now: Date = new Date();
+
+  public ListTypeCovering: any[] = [
+    { Name: 'Terremoto', Value: "Earthquake" },
+    { Name: 'Incendio', Value: "Fire" },
+    { Name: 'Robo', Value: "Stole" },
+    { Name: 'Pérdida', Value: "Lost" },
+    { Name: 'Otros', Value: "Others" }
+  ];
 
   constructor() { }
 
@@ -31,4 +39,8 @@ export class CardComponent implements OnInit {
     this.OnDelete.emit(this.data.Id)
   }
 
+  ListTypeCoverings(value){
+    return this.ListTypeCovering.find(x=>x.Value==value).Name;
+
+  }
 }
