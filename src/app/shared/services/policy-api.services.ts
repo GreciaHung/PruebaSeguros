@@ -17,22 +17,22 @@ export class PolicyApiServices {
     ) { }
 
     UpdatePolicy(id, body) {
-        return this.httpClient.put(environment.urlApi + "/policies/" + id, body);
+        return this.httpClient.put(environment.urlApi + "/Policies/" + id, body);
     }
 
     DeletePolicy(id) {
-        return this.httpClient.delete(environment.urlApi + "/policies/" + id);
+        return this.httpClient.delete(environment.urlApi + "/Policies/" + id);
     }
 
     GetPolicy(id) {
-        return this.httpClient.get(environment.urlApi + "/policies/" + id);
+        return this.httpClient.get(environment.urlApi + "/Policies/" + id);
     }
 
     GetAllPolicy() {
-        return this.httpClient.get(environment.urlApi + "/policies");
+        return this.httpClient.get(environment.urlApi + "/Policies");
     }
 
     SavePolicy(body) {
-        return this.httpClient.post(environment.urlApi + "/policies", body);
+        return this.httpClient.post(environment.urlApi + "/Policies", body);
     }
 }

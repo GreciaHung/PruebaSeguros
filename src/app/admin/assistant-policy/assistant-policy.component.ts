@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
 import * as moment from 'moment';
 import { AssistantPolicyManager } from 'src/app/shared/manager/assistant-policy-manager.services';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-assistant-policy',
@@ -10,51 +11,56 @@ import { AssistantPolicyManager } from 'src/app/shared/manager/assistant-policy-
 })
 export class AssistantPolicyComponent implements OnInit {
   public ListTypeCovering: any[] = [
-    { Name: 'Terremoto', Value: 1 },
-    { Name: 'Incendio', Value: 2 },
-    { Name: 'Robo', Value: 3 },
-    { Name: 'Pérdida', Value: 4 },
-    { Name: 'Otros', Value: 5 }
+    { Name: 'Terremoto', Value: "Earthquake" },
+    { Name: 'Incendio', Value: "Fire" },
+    { Name: 'Robo', Value: "Stole" },
+    { Name: 'Pérdida', Value: "Lost" },
+    { Name: 'Otros', Value: "Others" }
   ];
   public ListTypeRisk: any[] = [
-    { Name: 'Bajo', Value: 1 },
-    { Name: 'Medio', Value: 2 },
-    { Name: 'Medio-Alto', Value: 3 },
-    { Name: 'Alto', Value: 4 }
+    { Name: 'Bajo', Value: "Low" },
+    { Name: 'Medio', Value: "Medium" },
+    { Name: 'Medio-Alto', Value: "MediumHigh" },
+    { Name: 'Alto', Value: "High" }
   ];
   public Now = new Date();
   public loading = false;
-  public edit = false;
-
+  private subcritions = new Subscription();
 
   public FormPolicy: FormGroup = new FormGroup({
-    CustomerName: new FormControl({value:'', disabled: this.edit}, [Validators.required]),
+    CustomerName: new FormControl('', [Validators.required]),
     Description: new FormControl('', [Validators.required]),
-    TypeCover: new FormControl({value:'', disabled: this.edit}, [Validators.required]),
+    TypeCover: new FormControl('', [Validators.required]),
     TypeRisk: new FormControl('', [Validators.required]),
     PercentageCoverage: new FormControl('', [Validators.required]),
-    StartDate: new FormControl({value:'', disabled: this.edit}, [Validators.required]),
-    EndDate: new FormControl({value:'', disabled: this.edit}, [Validators.required]),
+    StartDate: new FormControl('', [Validators.required]),
+    EndDate: new FormControl('', [Validators.required]),
     Price: new FormControl('', [Validators.required])
 
   }, this.PercentageCoverageValidator)
 
   constructor(
-    private policyManager:AssistantPolicyManager
+    private policyManager: AssistantPolicyManager
   ) { }
 
   ngOnInit() {
-    this.policyManager.getLoading().subscribe(load=>this.loading = load);
-    this.policyManager.getPolicy().subscribe(res=>{
-      if(res){
-        res.id && (this.edit = true);
+    this.subcritions.add(this.policyManager.getLoading().subscribe(load => this.loading = load));
+    this.subcritions.add(this.policyManager.getPolicy().subscribe(res => {
+      if (res) {
+        if (res.Id) {
+          this.FormPolicy.controls['CustomerName'].disable();
+          this.FormPolicy.controls['TypeCover'].disable();
+          this.FormPolicy.controls['StartDate'].disable();
+          this.FormPolicy.controls['EndDate'].disable();
+        }
         this.FormPolicy.patchValue(res);
       }
-    });
+    }));
   }
 
-  ngOnDestroid(){
+  ngOnDestroid() {
     this.policyManager.destroyPolicy();
+    this.subcritions.unsubscribe();
   }
 
   getErrorMessagePercentageCoverage() {
@@ -84,7 +90,7 @@ export class AssistantPolicyComponent implements OnInit {
     if (fc.value.PercentageCoverage == "") {
       fc.get("PercentageCoverage").setErrors({ "required": true });
     } else {
-      if (fc.value.TypeRisk == 4 && fc.value.PercentageCoverage > 50)
+      if (fc.value.TypeRisk == "High" && fc.value.PercentageCoverage > 50)
         fc.get("PercentageCoverage").setErrors({ "customValidation": true });
       else
         fc.get("PercentageCoverage").setErrors(null);
@@ -102,8 +108,8 @@ export class AssistantPolicyComponent implements OnInit {
 
   savePolicy() {
     console.log(this.FormPolicy.value);
-
-    if(this.FormPolicy.valid){
+    
+    if (this.FormPolicy.valid) {
       this.policyManager.SavePolicy(this.FormPolicy.value);
     }
 

@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  urlApi: "http://demos-env.inmh6jfjr5.us-east-2.elasticbeanstalk.com"
+  endpoint: "http://demos-env.inmh6jfjr5.us-east-2.elasticbeanstalk.com",
+  urlApi: "http://demos-env.inmh6jfjr5.us-east-2.elasticbeanstalk.com/api"
 };
 
 /*

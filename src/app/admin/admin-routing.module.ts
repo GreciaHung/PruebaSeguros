@@ -5,7 +5,7 @@ import { ListPolicyComponent } from './list-policy/list-policy.component';
 
 
 
-const routes: Routes = [
+const routes: Routes = [ 
   { path: 'assistant-policy', component: AssistantPolicyComponent},
   { path: 'list-policy', component: ListPolicyComponent   },
 

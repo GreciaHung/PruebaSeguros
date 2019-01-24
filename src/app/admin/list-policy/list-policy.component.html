@@ -12,6 +12,7 @@
 
     </div>
     <div class="ContainerList">
+        <app-mask-loading [loading]="loading"></app-mask-loading>
         <div class="ContainerCard" *ngFor="let dataPolicy of PolicyList">
             <app-card [data]="dataPolicy"> </app-card>
         </div>

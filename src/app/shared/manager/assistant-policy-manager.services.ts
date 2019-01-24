@@ -49,7 +49,7 @@ export class AssistantPolicyManager {
     }
 
     GetPolicy(id) {
-        
+
         this._loading.next(true);
 
         this.policyService.GetPolicy(id).subscribe(res => {
