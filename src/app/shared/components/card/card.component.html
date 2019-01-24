@@ -13,7 +13,7 @@
       <div fxLayout="column" fxLayoutGap="10px" >
         <span class="TitleStartDate">{{data.StartDate | date:'longDate'}}</span>
         <span class="TitleEndDate">{{data.EndDate | date:'longDate'}}</span>
-        <span class="TitleEndDate" [ngStyle]="{'color':SetDate(data.EndDate | date:'longDate').getTime< now.getTime?'red':'green' }">{{SetDate(data.EndDate | date:'longDate').getTime< now.getTime?'Vencida':'Vigente'}}</span>
+        <span class="TitleEndDate" [ngStyle]="{'color':SetDate(data.EndDate | date:'longDate').getTime() < now.getTime()?'red':'green' }">{{SetDate(data.EndDate).getTime() < now.getTime()?'Vencida':'Vigente'}}</span>
     </div>
       <span class="Title">{{data.Description}}</span>
       <div fxLayout="row" fxLayoutAlign="space-between center">
