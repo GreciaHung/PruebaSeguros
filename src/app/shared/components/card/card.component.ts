@@ -1,5 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import {Policy} from '../../models/policy.model';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Policy } from '../../models/policy.model';
 
 @Component({
   selector: 'app-card',
@@ -9,11 +9,26 @@ import {Policy} from '../../models/policy.model';
 
 export class CardComponent implements OnInit {
   @Input()
-  public data:Policy;
+  public data: Policy;
+  @Output()
+  public OnDelete: EventEmitter<any> = new EventEmitter();
+
+  @Output()
+  public OnEdit: EventEmitter<any> = new EventEmitter();
+
+  public now: Date = new Date();
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  SetDate(date) {
+    return new Date(date);
+  }
+  
+  Delete() {
+    this.OnDelete.emit(this.data.Id)
   }
 
 }

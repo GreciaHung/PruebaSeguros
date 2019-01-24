@@ -1,8 +1,8 @@
 <div>
     <div fxLayout.lt-md="column" class="ContainerSearch">
-        <app-search class="AppSearch"></app-search>
+        <app-search (onSearch)="searchVal = $event" class="AppSearch"></app-search>
         <div fxLayoutGap="5px">
-            <a [routerLink]="['/assistant-policy']" mat-raised-button matTooltip="Agregar">
+            <a [routerLink]="['/assistant-policy/new']" mat-raised-button matTooltip="Agregar">
                 <mat-icon color="warn">add</mat-icon>
             </a>
             <button (click)="logout()" mat-raised-button matTooltip="Loguear/Desloguear" [routerLink]="['/auth/login']">
@@ -13,8 +13,8 @@
     </div>
     <div class="ContainerList">
         <app-mask-loading [loading]="loading"></app-mask-loading>
-        <div class="ContainerCard" *ngFor="let dataPolicy of PolicyList">
-            <app-card [data]="dataPolicy"> </app-card>
+        <div class="ContainerCard" *ngFor="let dataPolicy of PolicyList | search:searchVal:propertiesSearch">
+            <app-card (OnDelete)="Delete($event)" [data]="dataPolicy"> </app-card>
         </div>
     </div>
 </div>

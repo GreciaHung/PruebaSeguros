@@ -1,10 +1,10 @@
-<mat-card>
+<mat-card style="height: 300px">
     <mat-card-header>
       <div mat-card-avatar class="example-header-image"></div>
       <mat-card-title>{{data.CustomerName}}</mat-card-title>
       <mat-card-subtitle>{{data.PercentageCoverage+'% '+data.TypeRisk}}</mat-card-subtitle>
     </mat-card-header>
-    <div fxLayout="column" fxLayoutGap="10px">
+    <div class="body-card" fxLayout="column" fxLayoutGap="10px">
      
       <div  fxLayout="row" fxLayoutAlign="center" fxLayoutGap="8px">
         <span class="Title">{{data.TypeCover}}</span>
@@ -13,13 +13,14 @@
       <div fxLayout="column" fxLayoutGap="10px" >
         <span class="TitleStartDate">{{data.StartDate | date:'longDate'}}</span>
         <span class="TitleEndDate">{{data.EndDate | date:'longDate'}}</span>
+        <span class="TitleEndDate" [ngStyle]="{'color':SetDate(data.EndDate | date:'longDate').getTime< now.getTime?'red':'green' }">{{SetDate(data.EndDate | date:'longDate').getTime< now.getTime?'Vencida':'Vigente'}}</span>
     </div>
       <span class="Title">{{data.Description}}</span>
       <div fxLayout="row" fxLayoutAlign="space-between center">
-        <button mat-raised-button matTooltip="Borrar" mat-mini-fab color="warn">
+        <button  (click)="Delete()" mat-raised-button matTooltip="Borrar" mat-mini-fab color="warn">
           <mat-icon>delete</mat-icon>
         </button>
-        <button mat-mini-fab matTooltip="Editar" color="accent" [routerLink]="['/assistant-policy']">
+        <button mat-mini-fab matTooltip="Editar" color="accent" [routerLink]="['/assistant-policy/'+data.Id]">
             <mat-icon>edit</mat-icon>
         </button>
       </div>

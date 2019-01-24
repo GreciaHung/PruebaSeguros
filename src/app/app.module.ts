@@ -10,12 +10,14 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import {MatButtonModule} from '@angular/material/button';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './shared/services/auth-interceptor';
+import { MatSnackBarModule } from '@angular/material';
+import { SearchPipe } from './shared/pipes/search.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     AdminComponent,
-    AuthComponent
+    AuthComponent  
   ],
   imports: [
     BrowserModule,
@@ -23,7 +25,8 @@ import { AuthInterceptor } from './shared/services/auth-interceptor';
     BrowserAnimationsModule,
     FlexLayoutModule,
     MatButtonModule,
-    HttpClientModule
+    HttpClientModule,
+    MatSnackBarModule
 
   ],
   providers: [

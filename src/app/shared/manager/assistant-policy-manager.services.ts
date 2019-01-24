@@ -3,6 +3,7 @@ import { PolicyApiServices } from "../services/policy-api.services";
 import { BehaviorSubject } from "rxjs";
 import { Policy } from "../models/policy.model";
 import { Router } from "@angular/router";
+import { MatSnackBar } from "@angular/material";
 
 @Injectable({
     providedIn: 'root'
@@ -15,7 +16,8 @@ export class AssistantPolicyManager {
 
     constructor(
         private policyService: PolicyApiServices,
-        private router: Router
+        private router: Router,
+        private  snackBar: MatSnackBar
     ) {
 
     }
@@ -35,23 +37,33 @@ export class AssistantPolicyManager {
             this.policyService.SavePolicy(body).subscribe(res => {
                 this._loading.next(false);
                 this.router.navigate(['/list-policy']);
+                this.snackBar.open('Guardado correctamente', null, {
+                    duration: 3000
+                });
             }, err => {
                 this._loading.next(false);
+                this.snackBar.open('Error al guardar', null, {
+                    duration: 3000
+                });
             });
         else
-            this.policyService.UpdatePolicy(this._policy.getValue().id, body).subscribe(res => {
+            this.policyService.UpdatePolicy(this._policy.getValue().Id, {...this._policy.getValue(),...body}).subscribe(res => {
                 this._loading.next(false);
                 this.router.navigate(['/list-policy']);
+                this.snackBar.open('Actualizado correctamente', null, {
+                    duration: 3000
+                });
             }, err => {
                 this._loading.next(false);
+                this.snackBar.open('Error al actualizar', null, {
+                    duration: 3000
+                });
             });
 
     }
 
     GetPolicy(id) {
-
         this._loading.next(true);
-
         this.policyService.GetPolicy(id).subscribe(res => {
             this._loading.next(false);
             this._policy.next(res);

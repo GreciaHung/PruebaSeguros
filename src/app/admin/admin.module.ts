@@ -15,7 +15,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSelectModule} from '@angular/material/select';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatDatepickerModule} from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material';
+import { MatNativeDateModule, MatSnackBarModule } from '@angular/material';
 import { ListPolicyComponent } from './list-policy/list-policy.component';
 import { ComponentsModule } from '../shared/components/components.module';
 import { RouterModule, Routes } from '@angular/router';
@@ -43,7 +43,8 @@ import { MaskLoadingModule } from '../shared/components/mask-loading/mask-loadin
     ComponentsModule,
     RouterModule,
     NgxCurrencyModule,
-    MaskLoadingModule
+    MaskLoadingModule,
+    MatSnackBarModule
   ],
   declarations: [AssistantPolicyComponent, ListPolicyComponent]
 })

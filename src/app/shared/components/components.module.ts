@@ -9,11 +9,16 @@ import { CommonModule } from '@angular/common';
 import { CardComponent } from './card/card.component';
 import { SearchComponent } from './search/search.component';
 import { RouterModule } from '@angular/router';
+import { SearchPipe } from '../pipes/search.pipe';
 
 
 
 @NgModule({
-  declarations: [CardComponent, SearchComponent],
+  declarations: [
+    CardComponent, 
+    SearchComponent,
+    SearchPipe
+  ],
   imports: [
     CommonModule,
     MatCardModule,
@@ -23,6 +28,10 @@ import { RouterModule } from '@angular/router';
     RouterModule,
     MatTooltipModule
   ],
-  exports: [CardComponent, SearchComponent]
+  exports: [
+    CardComponent, 
+    SearchComponent,
+    SearchPipe
+  ]
 })
 export class ComponentsModule { }

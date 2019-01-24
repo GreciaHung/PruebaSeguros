@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { PolicyApiServices } from "../services/policy-api.services";
 import { BehaviorSubject } from "rxjs";
 import { Policy } from "../models/policy.model";
+import { MatSnackBar } from "@angular/material";
 
 @Injectable({
     providedIn: 'root'
@@ -13,7 +14,8 @@ export class ListPolicyManager {
     private _listPolicy: BehaviorSubject<any> = new BehaviorSubject(null);
 
     constructor(
-        private policyService: PolicyApiServices
+        private policyService: PolicyApiServices,
+        public snackBar: MatSnackBar
     ) {
 
     }
@@ -26,11 +28,22 @@ export class ListPolicyManager {
         return this._listPolicy.asObservable();
     }
 
-    DeletePolicy() {
-
+    DeletePolicy(id) {
+        this.policyService.DeletePolicy(id).subscribe(res => {
+            this._loading.next(false);
+            this.snackBar.open('Poliza Eliminada', null, {
+                duration: 3000
+            });
+            this.AllPolicy();
+        }, err => {
+            this.snackBar.open(err.error.ModelState.msg.length > 0 ? err.error.ModelState.msg[0] : "", null, {
+                duration: 3000
+            });
+            this._loading.next(false);
+        });
     }
 
-    GetAllPolicy() {
+    AllPolicy() {
         this._loading.next(true);
         this.policyService.GetAllPolicy().subscribe(res => {
             this._loading.next(false);

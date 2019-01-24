@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/fo
 import * as moment from 'moment';
 import { AssistantPolicyManager } from 'src/app/shared/manager/assistant-policy-manager.services';
 import { Subscription } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-assistant-policy',
@@ -25,7 +26,7 @@ export class AssistantPolicyComponent implements OnInit {
   ];
   public Now = new Date();
   public loading = false;
-  private subcritions = new Subscription();
+  private subscription = new Subscription();
 
   public FormPolicy: FormGroup = new FormGroup({
     CustomerName: new FormControl('', [Validators.required]),
@@ -40,13 +41,23 @@ export class AssistantPolicyComponent implements OnInit {
   }, this.PercentageCoverageValidator)
 
   constructor(
-    private policyManager: AssistantPolicyManager
+    private policyManager: AssistantPolicyManager,
+    private activatedRoute: ActivatedRoute
+
   ) { }
 
   ngOnInit() {
-    this.subcritions.add(this.policyManager.getLoading().subscribe(load => this.loading = load));
-    this.subcritions.add(this.policyManager.getPolicy().subscribe(res => {
+
+    this.subscription.add(this.activatedRoute.params.subscribe(params => {
+      if (params.id && params.id != 'new')
+        this.policyManager.GetPolicy(params.id);
+    }))
+
+    this.subscription.add(this.policyManager.getLoading().subscribe(load => this.loading = load));
+    this.subscription.add(this.policyManager.getPolicy().subscribe(res => {
       if (res) {
+        console.log(res);
+
         if (res.Id) {
           this.FormPolicy.controls['CustomerName'].disable();
           this.FormPolicy.controls['TypeCover'].disable();
@@ -58,9 +69,9 @@ export class AssistantPolicyComponent implements OnInit {
     }));
   }
 
-  ngOnDestroid() {
+  ngOnDestroy() {
     this.policyManager.destroyPolicy();
-    this.subcritions.unsubscribe();
+    this.subscription.unsubscribe();
   }
 
   getErrorMessagePercentageCoverage() {
@@ -107,8 +118,8 @@ export class AssistantPolicyComponent implements OnInit {
   }
 
   savePolicy() {
-    console.log(this.FormPolicy.value);
-    
+    // console.log(this.FormPolicy.value);
+
     if (this.FormPolicy.valid) {
       this.policyManager.SavePolicy(this.FormPolicy.value);
     }

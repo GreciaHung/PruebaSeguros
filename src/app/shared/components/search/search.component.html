@@ -8,7 +8,7 @@
         <div class="span12">
             <form id="custom-search-form" class="form-search form-horizontal pull-right">
                 <div class="input-append span12">
-                    <input type="text" class="search-query mac-style" placeholder="Buscar Poliza">
+                    <input (input)="onSearch.emit($event.target.value)" type="text" class="search-query mac-style" placeholder="Buscar Poliza">
                     <button type="submit" class="btn"><i class="icon-search"></i></button>
                 </div>
             </form>

@@ -1,7 +1,7 @@
 export class Policy{
     
     constructor(
-        public id:number,
+        public Id:number,
         public CustomerName:string,
         public Description:string,
         public TypeCover:string,
